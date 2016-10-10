@@ -1,0 +1,14 @@
+{
+  "name": "twtscrapper",
+  "version": "1.0.0",
+  "description": "Twitter scrapper given a hashtag",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin E. Calingacion",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.75.0"
+  }
+}
