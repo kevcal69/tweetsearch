@@ -12,6 +12,7 @@ let searchEndpoint = 'https://api.twitter.com/1.1/search/tweets.json'
 
 let _opts = {
         url: oauth2Endpoint,
+        method: 'POST',
         headers: {
             'Authorization':
                 'Basic ' + new Buffer(oauthCreds).toString('base64'),
@@ -25,11 +26,31 @@ var req = new Promise((res, rej) => {
         if(e) {
             rej()
         }
-        console.log(body);
-        res(qs.parse(body))
+        res(JSON.parse(body))
     })
 })
 
 req.then(token => {
-    console.log(token);
+    // let searcUrl = searchEndpoint + queryString + '&count=10'
+    // searcUrl = encodeURIComponent(searcUrl)
+
+    let _SearchOpts = {
+            url: searchEndpoint,
+            method: 'GET',
+            qs: {
+                q: queryString,
+                count: 100,
+                geocode: '10.3157,123.8854'
+
+            },
+            headers: {
+                'Authorization':
+                    'Bearer ' + token.access_token,
+                'Content-Type':
+                    'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+    }
+    request(_SearchOpts, function(e,r,body) {
+        console.log(body);
+    })
 });
